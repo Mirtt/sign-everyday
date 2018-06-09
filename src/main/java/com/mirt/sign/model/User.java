@@ -1,9 +1,11 @@
 package com.mirt.sign.model;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 /**
@@ -13,14 +15,19 @@ import java.time.LocalDateTime;
  * @create 2018/4/11.
  */
 @Data
-@Getter
-@Setter
 public class User {
 
-    private long userId;
+    private Long userId;
+    @NotNull
+    @Size(min = 2,max = 8,message = "username need to between 2 to 8")
     private String userName;
+    @NotNull
+    @Pattern(regexp = "^1\\d{10}$",message = "invalid phone number")
     private String phone;
+    @Email(message = "incorrect email address")
     private String email;
+    @NotNull
+    @Size(min = 6,max = 12,message = "password need to between 6 to 12")
     private String password;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;

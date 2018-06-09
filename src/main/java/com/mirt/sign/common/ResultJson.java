@@ -30,10 +30,28 @@ public class ResultJson<T> implements Serializable {
         this.data = data;
     }
 
+    public ResultJson(String msg){
+        super();
+        this.msg = msg;
+    }
+
+    public ResultJson(T data,String msg){
+        super();
+        this.data = data;
+        this.msg = msg;
+    }
+
     public ResultJson(HttpCode httpCode, String msg) {
         super();
         this.msg = msg;
         this.httpCode = httpCode.code;
+    }
+
+    public ResultJson(HttpCode httpCode,T data,String msg){
+        super();
+        this.httpCode = httpCode.code;
+        this.data = data;
+        this.msg = msg;
     }
 
 
