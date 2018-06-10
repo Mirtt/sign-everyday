@@ -1,4 +1,4 @@
-package com.mirt.sign.common;
+package com.mirt.sign.util;
 
 import java.util.Random;
 
