@@ -93,113 +93,20 @@
             <version>1.16.20</version>
             <scope>provided</scope>
         </dependency>
-        <!-- 以下为常用java开发库 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-net</groupId>
-            <artifactId>commons-net</artifactId>
-            <version>${commons-net.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons-io.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-core</artifactId>
-            <version>${ehcache-core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-ehcache</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-analyzers</artifactId>
-            <version>${lucene.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-highlighter</artifactId>
-            <version>${lucene.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.htmlparser</groupId>
-            <artifactId>htmlparser</artifactId>
-            <version>${htmlparser.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-            <version>${quartz.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>c3p0</groupId>
-                    <artifactId>c3p0</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-scratchpad</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.ant</groupId>
-            <artifactId>ant</artifactId>
-            <version>${ant.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.owasp-java-html-sanitizer</groupId>
-            <artifactId>owasp-java-html-sanitizer</artifactId>
-            <version>${owasp-java-html-sanitizer.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.bitwalker</groupId>
-            <artifactId>UserAgentUtils</artifactId>
-            <version>${UserAgentUtils.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.foxinmy</groupId>
-            <artifactId>weixin4j-mp</artifactId>
-            <version>${weixin4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.imgscalr</groupId>
-            <artifactId>imgscalr-lib</artifactId>
-            <version>${imgscalr.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.leopard.thirdparty</groupId>
-            <artifactId>jcaptcha-core</artifactId>
-            <version>${jcaptcha.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.im4java</groupId>
-            <artifactId>im4java</artifactId>
-            <version>${im4java.version}</version>
-        </dependency>
         <!--jrebel-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
+        </dependency>
+        <!--redis依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
     </dependencies>
 
@@ -214,6 +121,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

@@ -21,6 +21,8 @@ public class ResultJson<T> implements Serializable {
 
     private String msg = HttpCode.SUCCESS.description;
 
+    private String dataType;
+
     public ResultJson() {
         super();
     }
@@ -28,6 +30,7 @@ public class ResultJson<T> implements Serializable {
     public ResultJson(T data) {
         super();
         this.data = data;
+        this.dataType = data.getClass().getSimpleName();
     }
 
     public ResultJson(HttpCode httpCode, String msg) {
@@ -36,11 +39,12 @@ public class ResultJson<T> implements Serializable {
         this.httpCode = httpCode.code;
     }
 
-    public ResultJson(HttpCode httpCode,T data,String msg){
+    public ResultJson(HttpCode httpCode, T data, String msg) {
         super();
         this.httpCode = httpCode.code;
         this.data = data;
         this.msg = msg;
+        this.dataType = data.getClass().getSimpleName();
     }
 
 

@@ -5,8 +5,8 @@ import com.mirt.sign.common.ResultJson;
 import com.mirt.sign.model.User;
 import com.mirt.sign.service.UserService;
 import com.mirt.sign.util.CodeUtil;
-import org.apache.shiro.dao.DataAccessException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,7 +63,7 @@ public class RegisterController {
             }
             return new ResultJson(HttpCode.ERROR, String.join(", ", errMsg));
         }
-        //todo 通过验证后对用户进行注册
+        // 通过验证后对用户进行注册
         ResultJson<Map<String, Object>> result;
         try {
             result = userService.registerUser(user);
@@ -84,7 +84,6 @@ public class RegisterController {
         String code = CodeUtil.generateCode();
         HttpSession session = request.getSession();
         session.setAttribute("code", code);
-        ResultJson<String> result = new ResultJson<>(code);
-        return result;
+        return new ResultJson<>(code);
     }
 }

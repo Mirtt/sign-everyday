@@ -15,15 +15,15 @@ import java.time.LocalDateTime;
  * @create 2018/4/11.
  */
 @Data
-public class User {
+public class User{
 
     private Long userId;
     @NotNull
     @Size(min = 2,max = 8,message = "username need to between 2 to 8")
     private String userName;
-    @NotNull
     @Pattern(regexp = "^1\\d{10}$",message = "invalid phone number")
     private String phone;
+    @NotNull
     @Email(message = "incorrect email address")
     private String email;
     @NotNull

@@ -14,4 +14,6 @@ import java.util.Map;
 public interface UserService {
 
     ResultJson<Map<String,Object>> registerUser(User user);
+
+    ResultJson<User> getUserInfoByName(String userName);
 }
