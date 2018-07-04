@@ -6,6 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -15,7 +16,9 @@ import java.time.LocalDateTime;
  * @create 2018/4/11.
  */
 @Data
-public class User{
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 4737829251573179541L;
 
     private Long userId;
     @NotNull
