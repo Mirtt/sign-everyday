@@ -22,15 +22,15 @@ public class User implements Serializable {
 
     private Long userId;
     @NotNull
-    @Size(min = 2,max = 8,message = "username need to between 2 to 8")
+    @Size(min = 2, max = 8, message = "username need to between 2 to 8")
     private String userName;
-    @Pattern(regexp = "^1\\d{10}$",message = "invalid phone number")
+    @Pattern(regexp = "^1\\d{10}$", message = "invalid phone number")
     private String phone;
     @NotNull
     @Email(message = "incorrect email address")
     private String email;
     @NotNull
-    @Size(min = 6,max = 12,message = "password need to between 6 to 12")
+    @Size(min = 6, max = 12, message = "password need to between 6 to 12")
     private String password;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;

@@ -39,7 +39,7 @@ public class LogAspect {
     }
 
     @AfterReturning(pointcut = "controllerLog()", returning = "result")
-    public void logAfter(JoinPoint jp,ResultJson result) {
+    public void logAfter(JoinPoint jp, ResultJson result) {
         logger.info("返回结果 :");
         logger.info(result.toString());
     }

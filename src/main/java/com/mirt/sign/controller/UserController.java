@@ -23,7 +23,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public ResultJson<User> getUserInfoByName(@RequestParam("userName")String userName){
+    public ResultJson<User> getUserInfoByName(@RequestParam("userName") String userName) {
         return userService.getUserInfoByName(userName);
     }
 }

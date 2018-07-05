@@ -20,14 +20,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
-    @Results(id = "userResult",value = {
-            @Result(column = "user_id",property = "userId"),
-            @Result(column = "user_name",property = "userName"),
-            @Result(column = "phone",property = "phone"),
-            @Result(column = "email",property = "email"),
-            @Result(column = "password",property = "password"),
-            @Result(column = "create_time",property = "createTime"),
-            @Result(column = "update_time",property = "updateTime")
+    @Results(id = "userResult", value = {
+            @Result(column = "user_id", property = "userId"),
+            @Result(column = "user_name", property = "userName"),
+            @Result(column = "phone", property = "phone"),
+            @Result(column = "email", property = "email"),
+            @Result(column = "password", property = "password"),
+            @Result(column = "create_time", property = "createTime"),
+            @Result(column = "update_time", property = "updateTime")
     })
     @Select("select * from user where user_name = #{userName}")
     @Cacheable(key = "#p0")

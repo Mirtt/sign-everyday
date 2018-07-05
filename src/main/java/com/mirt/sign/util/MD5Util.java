@@ -28,12 +28,12 @@ public class MD5Util {
     private static String encodeHex(byte[] bytes) {
         StringBuffer buffer = new StringBuffer(bytes.length * 2);
 
-        for(int i = 0; i < bytes.length; ++i) {
+        for (int i = 0; i < bytes.length; ++i) {
             if ((bytes[i] & 255) < 16) {
                 buffer.append("0");
             }
 
-            buffer.append(Long.toString((long)(bytes[i] & 255), 16));
+            buffer.append(Long.toString((long) (bytes[i] & 255), 16));
         }
 
         return buffer.toString();

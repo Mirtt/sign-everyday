@@ -35,13 +35,13 @@ public class UserServiceImpl implements UserService {
         user.setPassword(MD5Util.encode(user.getPassword()));
         //insert user into MySql
         userMapper.insertUser(user);
-        ResultJson<Map<String,Object>> result = new ResultJson<>();
+        ResultJson<Map<String, Object>> result = new ResultJson<>();
         result.setHttpCode(HttpCode.SUCCESS.code);
         result.setMsg("注册成功");
-        Map<String,Object> resultData = new HashMap<>();
+        Map<String, Object> resultData = new HashMap<>();
         //complete response data
-        resultData.put("userName",user.getUserName());
-        resultData.put("phone",user.getPhone());
+        resultData.put("userName", user.getUserName());
+        resultData.put("phone", user.getPhone());
         result.setData(resultData);
         result.setDataType(user.getClass().getSimpleName());
         return result;
