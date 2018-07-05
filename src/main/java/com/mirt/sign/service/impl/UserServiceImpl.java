@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @authur zyq
@@ -48,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultJson<User> getUserInfoByName(String userName) {
-        User user = userMapper.getUserByUserName(userName);
+        User user = Optional.ofNullable(userMapper.getUserByUserName(userName)).orElse(new User());
         return new ResultJson<>(user);
     }
 }

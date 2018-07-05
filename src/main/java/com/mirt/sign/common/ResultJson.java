@@ -47,5 +47,8 @@ public class ResultJson<T> implements Serializable {
         this.dataType = data.getClass().getSimpleName();
     }
 
-
+    @Override
+    public String toString() {
+        return "\nstatus:" + this.httpCode + "\ndata:" + data + "\nmsg:" + msg;
+    }
 }
