@@ -1,11 +1,11 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://localhost:3306/test?useSSL=true
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
-      health-check-properties: select 1  #fixme unknown property
+      connection-test-query: select 1
   redis:
     host: localhost
     port: 6379
