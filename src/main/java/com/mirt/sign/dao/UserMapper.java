@@ -1,11 +1,9 @@
 package com.mirt.sign.dao;
 
 import com.mirt.sign.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
@@ -42,4 +40,7 @@ public interface UserMapper {
     @CachePut(key = "#p0.userName")
     void insertUser(User user);
 
+    @Update("update user set password = #{password} where user_id = #{userId}")
+    @CacheEvict(key = "#p0.userName")
+    void updateUserPassword(User user);
 }

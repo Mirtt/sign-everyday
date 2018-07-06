@@ -52,4 +52,11 @@ public class UserServiceImpl implements UserService {
         User user = Optional.ofNullable(userMapper.getUserByUserName(userName)).orElse(new User());
         return new ResultJson<>(user);
     }
+
+    @Override
+    @Transactional
+    public ResultJson<User> updateUserPassword(User user) {
+        userMapper.updateUserPassword(user);
+        return new ResultJson<>();
+    }
 }

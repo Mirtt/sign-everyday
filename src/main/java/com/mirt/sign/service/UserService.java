@@ -5,7 +5,6 @@ import com.mirt.sign.model.User;
 
 import java.util.Map;
 
-;
 
 /**
  * @authur zyq
@@ -16,4 +15,6 @@ public interface UserService {
     ResultJson<Map<String, Object>> registerUser(User user);
 
     ResultJson<User> getUserInfoByName(String userName);
+
+    ResultJson<User> updateUserPassword(User user);
 }

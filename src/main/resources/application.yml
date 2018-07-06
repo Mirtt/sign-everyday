@@ -18,7 +18,6 @@ spring:
   cache:
     type: redis
 
-
 mybatis:
   type-aliases-package: com.mirt.sign.model
 
