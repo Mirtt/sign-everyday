@@ -1,5 +1,6 @@
 package com.mirt.sign.model;
 
+import com.mirt.sign.common.ValidationInsert;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -27,7 +28,7 @@ public class User implements Serializable {
     @Pattern(regexp = "^1\\d{10}$", message = "invalid phone number")
     private String phone;
     @NotNull
-    @Email(message = "incorrect email address")
+    @Email(message = "incorrect email address", groups = ValidationInsert.class)
     private String email;
     @NotNull
     @Size(min = 6, max = 12, message = "password need to between 6 to 12")
