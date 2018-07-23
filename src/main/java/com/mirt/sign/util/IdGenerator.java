@@ -3,8 +3,8 @@ package com.mirt.sign.util;
 /**
  * id generator
  *
- * @authur Zhang Yuqi
- * @create 2018/7/4.
+ * @author Mirt
+ * @date 2018/7/4.
  */
 public class IdGenerator {
 
@@ -35,8 +35,8 @@ public class IdGenerator {
         if (datacenterId > maxDatacenterId || datacenterId < 0) {
             throw new IllegalArgumentException(String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
         }
-        this.workerId = workerId;
-        this.datacenterId = datacenterId;
+        IdGenerator.workerId = workerId;
+        IdGenerator.datacenterId = datacenterId;
     }
 
     public synchronized static long nextId() {

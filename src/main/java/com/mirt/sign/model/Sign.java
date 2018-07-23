@@ -9,8 +9,8 @@ import java.time.LocalTime;
 /**
  * 签到功能实体
  *
- * @authur Zhang Yuqi
- * @create 2018/4/11.
+ * @author Mirt
+ * @date 2018/4/11.
  */
 @Data
 public class Sign {

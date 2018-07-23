@@ -6,11 +6,11 @@ import java.security.NoSuchAlgorithmException;
 /**
  * md5 encode
  *
- * @authur Zhang Yuqi
- * @create 2018/4/11.
+ * @author Zhang Yuqi
+ * @date 2018/4/11.
  */
-public class MD5Util {
-    public MD5Util() {
+public class Md5Util {
+    public Md5Util() {
     }
 
     public static String encode(String source) {

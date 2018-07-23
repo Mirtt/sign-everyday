@@ -16,8 +16,8 @@ import java.time.Duration;
 /**
  * redis缓存配置
  *
- * @authur Zhang Yuqi
- * @create 2018/7/5.
+ * @author Mirt
+ * @date 2018/7/5.
  */
 @Configuration
 @EnableCaching
@@ -25,8 +25,10 @@ public class RedisConfig {
 
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+        // 设置缓存有效期一小时
+        // 设置序列化格式为FastJson
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofHours(1))  // 设置缓存有效期一小时
+                .entryTtl(Duration.ofHours(1))
                 .serializeValuesWith(
                         RedisSerializationContext
                                 .SerializationPair

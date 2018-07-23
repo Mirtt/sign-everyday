@@ -2,7 +2,7 @@ package com.mirt.sign.controller;
 
 import com.mirt.sign.common.HttpCode;
 import com.mirt.sign.common.ResultJson;
-import com.mirt.sign.common.ValidationUpdate;
+import com.mirt.sign.common.validation.ValidationUpdate;
 import com.mirt.sign.model.User;
 import com.mirt.sign.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,8 @@ import java.util.Objects;
 /**
  * 用户相关操作接口
  *
- * @authur Zhang Yuqi
- * @create 2018/7/4.
+ * @author Mirt
+ * @date 2018/7/4.
  */
 @RestController
 @RequestMapping("/user")
@@ -32,8 +32,9 @@ public class UserController {
 
     @PostMapping("/{userId}")
     public ResultJson<User> updateUserPassword(@RequestBody @Validated({ValidationUpdate.class, Default.class}) User user, @PathVariable("userId") Long userId) {
-        if (Objects.isNull(user.getUserId()) || !userId.equals(user.getUserId()))
+        if (Objects.isNull(user.getUserId()) || !userId.equals(user.getUserId())) {
             return new ResultJson<>(HttpCode.ERROR, "用户数据错误");
+        }
         return userService.updateUserPassword(user);
     }
 }

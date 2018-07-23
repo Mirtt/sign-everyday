@@ -7,8 +7,8 @@ import java.io.Serializable;
 /**
  * 返回结果通用类
  *
- * @authur Zhang Yuqi
- * @create 2018/4/11.
+ * @author Mirt
+ * @date 2018/4/11.
  */
 @Data
 public class ResultJson<T> implements Serializable {

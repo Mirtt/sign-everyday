@@ -2,7 +2,7 @@ package com.mirt.sign.controller;
 
 import com.mirt.sign.common.HttpCode;
 import com.mirt.sign.common.ResultJson;
-import com.mirt.sign.common.ValidationInsert;
+import com.mirt.sign.common.validation.ValidationInsert;
 import com.mirt.sign.model.User;
 import com.mirt.sign.service.UserService;
 import com.mirt.sign.util.CodeUtil;
@@ -19,8 +19,8 @@ import java.util.Map;
 /**
  * 注册用户接口
  *
- * @authur zyq
- * @create 18-6-5.
+ * @author Mirt
+ * @date 18-6-5.
  */
 @RestController
 @RequestMapping("/register")

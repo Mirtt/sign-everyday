@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 记录日志切面
  *
- * @authur Zhang Yuqi
- * @create 2018/7/5.
+ * @author Mirt
+ * @date 2018/7/5.
  */
 
 @Aspect

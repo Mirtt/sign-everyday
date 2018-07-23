@@ -5,8 +5,8 @@ import java.util.Random;
 /**
  * 用于生成页面验证码
  *
- * @authur zyq
- * @create 18-6-10.
+ * @author Mirt
+ * @date 18-6-10.
  */
 public class CodeUtil {
     private CodeUtil() {

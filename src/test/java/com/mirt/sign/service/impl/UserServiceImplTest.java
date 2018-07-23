@@ -12,10 +12,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * ${DESCRIPTION}
- *
- * @authur Zhang Yuqi
- * @create 2018/7/4.
+ * @author Mirt
+ * @date 2018/7/4.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = SignEverydayApplication.class)

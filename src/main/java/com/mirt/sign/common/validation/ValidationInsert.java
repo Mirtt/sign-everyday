@@ -1,4 +1,4 @@
-package com.mirt.sign.common;
+package com.mirt.sign.common.validation;
 
 /**
  * 新增校验标识接口

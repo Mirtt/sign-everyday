@@ -1,6 +1,6 @@
 package com.mirt.sign.model;
 
-import com.mirt.sign.common.ValidationInsert;
+import com.mirt.sign.common.validation.ValidationInsert;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 /**
  * 用户类
  *
- * @authur Zhang Yuqi
- * @create 2018/4/11.
+ * @author Mirt
+ * @date 2018/4/11.
  */
 @Data
 public class User implements Serializable {

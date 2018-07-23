@@ -3,10 +3,11 @@ package com.mirt.sign.common;
 /**
  * 返回的状态码以及描述
  *
- * @authur Zhang Yuqi
- * @create 2018/4/11.
+ * @author Mirt
+ * @date 2018/4/11.
  */
 public enum HttpCode {
+    // 各个请求状态码
     SUCCESS(200, "success"),
     NO_AUTHORIZATION(401, "无权限"),
     ERROR(400, "Bad Request"),
