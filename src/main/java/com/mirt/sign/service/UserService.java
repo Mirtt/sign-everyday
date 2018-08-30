@@ -3,8 +3,6 @@ package com.mirt.sign.service;
 import com.mirt.sign.common.ResultJson;
 import com.mirt.sign.model.User;
 
-import java.util.Map;
-
 
 /**
  * @author Mirt
@@ -18,7 +16,7 @@ public interface UserService {
      * @param user 待注册用户
      * @return 返回结果
      */
-    ResultJson<Map<String, Object>> registerUser(User user);
+    void registerUser(User user);
 
     /**
      * 根据用户名获取用户信息
@@ -34,5 +32,13 @@ public interface UserService {
      * @param user 含有用户密码信息和id
      * @return 是否成功
      */
-    ResultJson<User> updateUserPassword(User user);
+    void updateUserPassword(User user);
+
+    /**
+     * 验证用户登录信息是否正确（用户名，密码）
+     *
+     * @param user 用户信息
+     * @return true if user exist
+     */
+    boolean checkUserPwd(User user);
 }

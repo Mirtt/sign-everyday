@@ -1,7 +1,6 @@
 package com.mirt.sign.service.impl;
 
 import com.mirt.sign.SignEverydayApplication;
-import com.mirt.sign.common.ResultJson;
 import com.mirt.sign.model.User;
 import com.mirt.sign.service.UserService;
 import org.junit.Test;
@@ -25,11 +24,10 @@ public class UserServiceImplTest {
     @Test
     @Rollback
     public void registerUser() {
-        User user =  new User();
+        User user = new User();
         user.setUserName("xxx");
         user.setPassword("xxx");
         user.setEmail("123@123.com");
-        ResultJson rs = userService.registerUser(user);
-        System.out.println(rs.getData());
+        userService.registerUser(user);
     }
 }

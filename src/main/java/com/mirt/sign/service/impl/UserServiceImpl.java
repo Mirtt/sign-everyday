@@ -1,6 +1,5 @@
 package com.mirt.sign.service.impl;
 
-import com.mirt.sign.common.HttpCode;
 import com.mirt.sign.common.ResultJson;
 import com.mirt.sign.dao.UserMapper;
 import com.mirt.sign.model.User;
@@ -12,8 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -28,23 +26,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public ResultJson<Map<String, Object>> registerUser(User user) {
+    public void registerUser(User user) {
         user.setUserId(IdGenerator.nextId());
         user.setUpdateTime(LocalDateTime.now());
         user.setCreateTime(LocalDateTime.now());
         user.setPassword(Md5Util.encode(user.getPassword()));
         //insert user into MySql
         userMapper.insertUser(user);
-        ResultJson<Map<String, Object>> result = new ResultJson<>();
-        result.setHttpCode(HttpCode.SUCCESS.code);
-        result.setMsg("注册成功");
-        Map<String, Object> resultData = new HashMap<>(4);
-        //complete response data
-        resultData.put("userName", user.getUserName());
-        resultData.put("phone", user.getPhone());
-        result.setData(resultData);
-        result.setDataType(user.getClass().getSimpleName());
-        return result;
     }
 
     @Override
@@ -55,8 +43,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public ResultJson<User> updateUserPassword(User user) {
+    public void updateUserPassword(User user) {
+        user.setPassword(Md5Util.encode(user.getPassword()));
         userMapper.updateUserPassword(user);
-        return new ResultJson<>();
+    }
+
+    @Override
+    public boolean checkUserPwd(User user) {
+        if (Objects.isNull(user))
+            return false;
+        User u = userMapper.getUserByEmail(user);
+        if (Objects.isNull(u))
+            return false;
+        String inputPwd = user.getPassword();
+        String actualPwd = u.getPassword();
+        if (Objects.isNull(inputPwd) || Objects.isNull(actualPwd))
+            return false;
+        return Objects.equals(Md5Util.encode(inputPwd), actualPwd);
     }
 }

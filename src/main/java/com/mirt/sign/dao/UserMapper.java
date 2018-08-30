@@ -1,7 +1,12 @@
 package com.mirt.sign.dao;
 
 import com.mirt.sign.model.User;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -37,6 +42,10 @@ public interface UserMapper {
     @Cacheable(key = "#p0")
     User getUserByUserName(String userName);
 
+    @ResultMap("userResult")
+    @Select("select * from user where email = #{email}")
+    @Cacheable(key = "#p0.userName")
+    User getUserByEmail(User user);
 
     /**
      * 向数据库中加入用户信息

@@ -76,6 +76,12 @@
             <artifactId>fastjson</artifactId>
             <version>RELEASE</version>
         </dependency>
+        <!--spring session for redis-->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>

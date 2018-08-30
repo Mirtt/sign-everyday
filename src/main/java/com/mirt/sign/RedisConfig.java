@@ -9,7 +9,11 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.session.SessionRepository;
+import org.springframework.session.data.redis.RedisOperationsSessionRepository;
 
 import java.time.Duration;
 
@@ -37,5 +41,25 @@ public class RedisConfig {
         return RedisCacheManager
                 .builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory))
                 .cacheDefaults(redisCacheConfiguration).build();
+    }
+
+    @Bean
+    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<Object, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(redisConnectionFactory);
+        template.setDefaultSerializer(new GenericFastJsonRedisSerializer());
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new GenericFastJsonRedisSerializer());
+        template.setHashValueSerializer(new GenericFastJsonRedisSerializer());
+        template.setHashKeySerializer(new GenericFastJsonRedisSerializer());
+        return template;
+    }
+
+    @Bean
+    public SessionRepository sessionRepository(RedisConnectionFactory factory) {
+        RedisOperationsSessionRepository sessionRepository = new RedisOperationsSessionRepository(redisTemplate(factory));
+        sessionRepository.setDefaultSerializer(new GenericFastJsonRedisSerializer());
+        sessionRepository.setDefaultMaxInactiveInterval(36000);
+        return sessionRepository;
     }
 }

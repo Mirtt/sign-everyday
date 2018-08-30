@@ -7,13 +7,17 @@ import com.mirt.sign.model.User;
 import com.mirt.sign.service.UserService;
 import com.mirt.sign.util.CodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.groups.Default;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -50,13 +54,17 @@ public class RegisterController {
         if (!code.equals(session.getAttribute("code"))) {
             return new ResultJson(HttpCode.ERROR, "验证码填写错误");
         }
+        userService.registerUser(user);
         // 通过验证后对用户进行注册
-        ResultJson<Map<String, Object>> result;
-        try {
-            result = userService.registerUser(user);
-        } catch (DataAccessException e) {
-            return new ResultJson(HttpCode.ERROR, e.getMessage());
-        }
+        ResultJson<Map<String, Object>> result = new ResultJson<>();
+        result.setHttpCode(HttpCode.SUCCESS.code);
+        result.setMsg("注册成功");
+        Map<String, Object> resultData = new HashMap<>(4);
+        //complete response data
+        resultData.put("userName", user.getUserName());
+        resultData.put("phone", user.getPhone());
+        result.setData(resultData);
+        result.setDataType(user.getClass().getSimpleName());
         return result;
     }
 
