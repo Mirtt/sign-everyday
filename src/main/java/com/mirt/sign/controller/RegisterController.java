@@ -42,17 +42,20 @@ public class RegisterController {
      * @return
      */
     @PostMapping("/user")
-    public ResultJson register(
+    public String register(
             HttpServletRequest request,
             @Validated({ValidationInsert.class, Default.class}) User user,
-            @RequestParam("code") String code
+            @RequestParam("code") String code,
+            Model model
     ) {
         HttpSession session = request.getSession();
         if (session.getAttribute("code") == null) {
-            return new ResultJson(HttpCode.ERROR, "无验证码信息");
+            model.addAttribute("msg", "无验证码信息");
+            return "register";
         }
         if (!code.equals(session.getAttribute("code"))) {
-            return new ResultJson(HttpCode.ERROR, "验证码填写错误");
+            model.addAttribute("result", "验证码填写错误");
+            return "register";
         }
         userService.registerUser(user);
         // 通过验证后对用户进行注册
@@ -61,11 +64,12 @@ public class RegisterController {
         result.setMsg("注册成功");
         Map<String, Object> resultData = new HashMap<>(4);
         //complete response data
-        resultData.put("userName", user.getUserName());
+        resultData.put("email", user.getEmail());
         resultData.put("phone", user.getPhone());
         result.setData(resultData);
         result.setDataType(user.getClass().getSimpleName());
-        return result;
+        model.addAttribute("result", result);
+        return "login";
     }
 
     /**
@@ -75,7 +79,7 @@ public class RegisterController {
      * @return
      */
     @RequestMapping("/generateCode")
-    public void generateCode(HttpServletRequest request,Model model) {
+    public void generateCode(HttpServletRequest request, Model model) {
         String code = CodeUtil.generateCode();
         HttpSession session = request.getSession();
         session.setAttribute("code", code);

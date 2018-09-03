@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
@@ -44,7 +43,7 @@ public interface UserMapper {
 
     @ResultMap("userResult")
     @Select("select * from user where email = #{email}")
-    @Cacheable(key = "#p0.userName")
+    @Cacheable(key = "#p0.email")
     User getUserByEmail(User user);
 
     /**
@@ -57,7 +56,6 @@ public interface UserMapper {
             "value " +
             "(#{userId},#{userName},#{phone},#{email}," +
             "#{password},#{createTime},#{updateTime})")
-    @CachePut(key = "#p0.userName")
     void insertUser(User user);
 
     /**
@@ -66,6 +64,6 @@ public interface UserMapper {
      * @param user 含有用户密码和id信息
      */
     @Update("update user set password = #{password} where user_id = #{userId}")
-    @CacheEvict(key = "#p0.userName")
+    @CacheEvict(key = "#p0.email")
     void updateUserPassword(User user);
 }

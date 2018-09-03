@@ -1,6 +1,5 @@
 package com.mirt.sign.service;
 
-import com.mirt.sign.common.ResultJson;
 import com.mirt.sign.model.User;
 
 
@@ -19,12 +18,12 @@ public interface UserService {
     void registerUser(User user);
 
     /**
-     * 根据用户名获取用户信息
+     * 根据用户邮箱获取用户信息
      *
-     * @param userName 用户名
+     * @param email 用户名
      * @return 用户信息
      */
-    ResultJson<User> getUserInfoByName(String userName);
+    User getUserInfoByEmail(String email);
 
     /**
      * 更新用户密码

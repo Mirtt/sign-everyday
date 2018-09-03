@@ -33,10 +33,10 @@ public class AuthFilter implements Filter {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    private static final String[] PATH_NO_NEED_FILTER = {"/login", "/logout", "/register"};
+    private static final String[] PATH_NO_NEED_FILTER = {"/", "/login", "/logout", "/register", "/fail", "/auth"};
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         log.info("权限过滤器：'AuthFilter' to urls:[/*]");
     }
 
@@ -45,14 +45,15 @@ public class AuthFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getRequestURI().substring(request.getContextPath().length());
-        boolean noNeedFilter = Arrays.stream(PATH_NO_NEED_FILTER).anyMatch(url::contains);
-        // todo 获取sessionId
-        String sessionId = "sessionId";
-        if (noNeedFilter || isAllowed(sessionId)) {
+        boolean noNeedFilter = Arrays.stream(PATH_NO_NEED_FILTER).anyMatch(url::equals);
+        // 获取sessionId
+        String sessionId = request.getSession().getId();
+        String jwt = request.getHeader("token");
+        if (noNeedFilter || isAllowed(sessionId, jwt)) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            // todo 设置重定向地址
-            response.sendRedirect("login");
+            // 设置重定向地址
+            response.sendRedirect("/");
         }
     }
 
@@ -67,8 +68,8 @@ public class AuthFilter implements Filter {
      * @param sessionId
      * @return
      */
-    private boolean isAllowed(String sessionId) {
-        if (Objects.isNull(sessionId))
+    private boolean isAllowed(String sessionId, String jwt) {
+        if (Objects.isNull(sessionId) || Objects.isNull(jwt))
             return false;
         // todo 判断sessionId是否存在
 

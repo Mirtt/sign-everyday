@@ -1,6 +1,5 @@
 package com.mirt.sign.service.impl;
 
-import com.mirt.sign.common.ResultJson;
 import com.mirt.sign.dao.UserMapper;
 import com.mirt.sign.model.User;
 import com.mirt.sign.service.UserService;
@@ -36,9 +35,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultJson<User> getUserInfoByName(String userName) {
-        User user = Optional.ofNullable(userMapper.getUserByUserName(userName)).orElse(new User());
-        return new ResultJson<>(user);
+    public User getUserInfoByEmail(String email) {
+        User u = new User();
+        u.setEmail(email);
+        return Optional.ofNullable(userMapper.getUserByEmail(u)).orElse(new User());
     }
 
     @Override

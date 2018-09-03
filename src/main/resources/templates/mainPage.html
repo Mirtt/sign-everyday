@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>main</title>
+</head>
+<body>
+<button onclick="auth()">授权</button>
+<button onclick="success()">进入需要授权才能访问的页面</button>
+<button onclick="logout()">登出</button>
+</body>
+<script th:inline="javascript">
+    function auth() {
+        var req = new XMLHttpRequest();
+        req.open("GET", "/auth");
+        req.send();
+    }
+
+    function success() {
+        var req = new XMLHttpRequest();
+        req.open("GET", "/success");
+        var cookie = document.cookie;
+        console.log(cookie);
+        req.setRequestHeader("token", "jwt");
+        req.send();
+    }
+
+    function logout() {
+        var req = new XMLHttpRequest();
+        req.open("GET", "/logout");
+        req.send();
+    }
+</script>
+</html>

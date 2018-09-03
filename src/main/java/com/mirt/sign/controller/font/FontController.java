@@ -3,7 +3,7 @@ package com.mirt.sign.controller.font;
 import com.mirt.sign.util.CodeUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,17 +17,27 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class FontController {
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String login() {
         return "login";
     }
 
-    @RequestMapping("/register")
-    public String register(HttpServletRequest request,Model model) {
+    @GetMapping("/register")
+    public String register(HttpServletRequest request, Model model) {
         String code = CodeUtil.generateCode();
         HttpSession session = request.getSession();
         session.setAttribute("code", code);
         model.addAttribute("code", code);
         return "register";
+    }
+
+    @GetMapping("/success")
+    public String success() {
+        return "success";
+    }
+
+    @GetMapping("/fail")
+    public String fail() {
+        return "fail";
     }
 }
