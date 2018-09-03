@@ -7,8 +7,8 @@ spring:
     hikari:
       connection-test-query: select 1
   redis:
-    host: 192.168.12.132
-    port: 63791
+    host: localhost
+    port: 6379
     jedis:
       pool:
         max-active: 20
@@ -23,3 +23,8 @@ mybatis:
 
 logging:
   config: classpath:logback-spring.xml
+
+jwt:
+  algorithm: HS256
+  secret: mirt
+  expires: 10800
