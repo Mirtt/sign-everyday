@@ -1,6 +1,7 @@
 package com.mirt.sign.util;
 
 import com.mirt.sign.model.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -75,9 +76,20 @@ public class JwtUtil {
         ZonedDateTime zdt = expireTime.atZone(zoneId);
         Date date = Date.from(zdt.toInstant());
         builder.setExpiration(date);
-        builder.setExpiration(new Date());
+        builder.setIssuedAt(new Date());
         builder.signWith(algorithm, signingKey);
 
         return builder.compact();
     }
+
+    public static Claims parseJwt(String jwt) {
+        try {
+            return Jwts.parser()
+                    .setSigningKey(DatatypeConverter.parseBase64Binary(secretS))
+                    .parseClaimsJws(jwt).getBody();
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
 }

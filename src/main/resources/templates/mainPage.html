@@ -21,7 +21,7 @@
         req.open("GET", "/success");
         var cookie = document.cookie;
         console.log(cookie);
-        req.setRequestHeader("token", "jwt");
+        req.setRequestHeader("token", cookie.split("=")[1]);
         req.send();
     }
 

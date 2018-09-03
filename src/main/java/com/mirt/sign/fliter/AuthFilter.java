@@ -1,5 +1,7 @@
 package com.mirt.sign.fliter;
 
+import com.mirt.sign.util.JwtUtil;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -45,8 +47,9 @@ public class AuthFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getRequestURI().substring(request.getContextPath().length());
-        boolean noNeedFilter = Arrays.stream(PATH_NO_NEED_FILTER).anyMatch(url::equals);
+        boolean noNeedFilter = Arrays.stream(PATH_NO_NEED_FILTER).anyMatch(s -> s.contains(url));
         // 获取sessionId
+
         String sessionId = request.getSession().getId();
         String jwt = request.getHeader("token");
         if (noNeedFilter || isAllowed(sessionId, jwt)) {
@@ -71,7 +74,15 @@ public class AuthFilter implements Filter {
     private boolean isAllowed(String sessionId, String jwt) {
         if (Objects.isNull(sessionId) || Objects.isNull(jwt))
             return false;
-        // todo 判断sessionId是否存在
+        // todo 根据sessionId获取当前人email 与 jwt的email比对
+
+        // todo 判断Jwt是否符合要求
+        Claims claims = JwtUtil.parseJwt(jwt);
+        if (Objects.isNull(claims))
+            return false;
+        if (!"mirt".equalsIgnoreCase(claims.getIssuer()))
+            return false;
+        String userEmail = claims.get("user-email", String.class);
 
         return true;
     }
