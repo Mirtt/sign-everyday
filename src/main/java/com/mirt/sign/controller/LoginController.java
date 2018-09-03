@@ -5,6 +5,7 @@ import com.mirt.sign.common.ResultJson;
 import com.mirt.sign.model.User;
 import com.mirt.sign.service.UserService;
 import com.mirt.sign.util.JwtUtil;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 /**
  * 用于用户登录登出
@@ -53,6 +55,17 @@ public class LoginController {
 
     @GetMapping("/auth")
     public void auth(HttpServletRequest request, HttpServletResponse response) {
+        // 如果已经有jwt且没有过期则不生成新的jwt
+        Cookie[] cookies = request.getCookies();
+        for (Cookie c : cookies) {
+            if ("token".equalsIgnoreCase(c.getName())) {
+                String jwt = c.getValue();
+                Claims claims = JwtUtil.parseJwt(jwt);
+                if (Objects.nonNull(claims)) {
+                    return;
+                }
+            }
+        }
         // 生成jwt
         HttpSession session = request.getSession();
         String email = String.valueOf(session.getAttribute("user-email"));
@@ -60,6 +73,8 @@ public class LoginController {
         String jwt = JwtUtil.createJwt(user);
         // jwt加入到cookie中
         Cookie cookie = new Cookie("token", jwt);
+        cookie.setSecure(true);
+        cookie.setHttpOnly(true);
         response.addCookie(cookie);
     }
 
