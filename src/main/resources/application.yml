@@ -7,8 +7,8 @@ spring:
     hikari:
       connection-test-query: select 1
   redis:
-    host: localhost
-    port: 6379
+    host: 192.168.12.132
+    port: 63791
     jedis:
       pool:
         max-active: 20

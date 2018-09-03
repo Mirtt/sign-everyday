@@ -35,7 +35,7 @@ public interface UserService {
     void updateUserPassword(User user);
 
     /**
-     * 验证用户登录信息是否正确（用户名，密码）
+     * 验证用户登录信息是否正确（邮箱，密码）
      *
      * @param user 用户信息
      * @return true if user exist

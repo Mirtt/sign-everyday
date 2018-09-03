@@ -7,12 +7,12 @@ import com.mirt.sign.model.User;
 import com.mirt.sign.service.UserService;
 import com.mirt.sign.util.CodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,7 +26,7 @@ import java.util.Map;
  * @author Mirt
  * @date 18-6-5.
  */
-@RestController
+@Controller
 @RequestMapping("/register")
 public class RegisterController {
 
@@ -44,7 +44,7 @@ public class RegisterController {
     @PostMapping("/user")
     public ResultJson register(
             HttpServletRequest request,
-            @RequestBody @Validated({ValidationInsert.class, Default.class}) User user,
+            @Validated({ValidationInsert.class, Default.class}) User user,
             @RequestParam("code") String code
     ) {
         HttpSession session = request.getSession();
@@ -75,10 +75,10 @@ public class RegisterController {
      * @return
      */
     @RequestMapping("/generateCode")
-    public ResultJson generateCode(HttpServletRequest request) {
+    public void generateCode(HttpServletRequest request,Model model) {
         String code = CodeUtil.generateCode();
         HttpSession session = request.getSession();
         session.setAttribute("code", code);
-        return new ResultJson<>(code);
+        model.addAttribute("code", code);
     }
 }

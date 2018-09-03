@@ -5,10 +5,9 @@ import com.mirt.sign.common.ResultJson;
 import com.mirt.sign.model.User;
 import com.mirt.sign.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,13 +19,13 @@ import javax.servlet.http.HttpSession;
  * @author Mirt Zhang
  * @date 2018/8/30
  */
-@RestController
+@Controller
 public class LoginController {
     @Autowired
     private UserService userService;
 
     @PostMapping("/login")
-    public ResultJson<String> login(HttpServletRequest request, @RequestBody User user) {
+    public ResultJson<String> login(HttpServletRequest request, User user) {
         // 确认登录用户的账号密码是否正确
         boolean isUserExist = userService.checkUserPwd(user);
         if (isUserExist) {
